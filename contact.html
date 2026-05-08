@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Gate | Mudit Gupta</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#ffd700',
+                        charcoal: '#050505',
+                        electric: '#00e5ff',
+                    },
+                    fontFamily: {
+                        heading: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="bg-charcoal text-gray-200 antialiased font-sans overflow-x-hidden">
+    <!-- Global Visual Overlays -->
+    <div class="film-grain"></div>
+
+    <!-- Canvas for Hero Background -->
+    <canvas id="background-canvas"></canvas>
+
+    <!-- Mid-ground Parallax Elements -->
+    <div id="parallax-midground" class="fixed inset-0 pointer-events-none z-[1] overflow-hidden">
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 border border-white/5 rounded-full blur-3xl opacity-20"
+            style="border-color: var(--secondary-color);"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 border border-white/5 rounded-full blur-3xl opacity-10"
+            style="border-color: var(--primary-color);"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav
+        class="fixed w-full z-50 py-6 transition-all duration-300 backdrop-blur-xl bg-charcoal/80 border-b border-white/5 group">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <a href="index.html" class="group/logo relative z-50">
+                <span
+                    class="text-2xl font-heading font-bold text-gold tracking-tight group-hover/logo:text-white transition-colors text-glow drop-shadow-[0_0_15px_rgba(255,215,0,0.5)]">MG
+                    VERSE</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div
+                class="hidden md:flex items-center gap-1 bg-white/5 backdrop-blur-md px-1.5 py-1 rounded-full border border-white/5 shadow-2xl transition-all hover:border-gold/20">
+                <a href="index.html"
+                    class="nav-link-god px-5 py-2 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-gold transition-colors">Home</a>
+                <a href="about.html"
+                    class="nav-link-god px-5 py-2 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-gold transition-colors">About</a>
+                <a href="skills.html"
+                    class="nav-link-god px-5 py-2 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-gold transition-colors">Skills</a>
+                <a href="projects.html"
+                    class="nav-link-god px-5 py-2 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-gold transition-colors">Projects</a>
+                <a href="experience.html"
+                    class="nav-link-god px-5 py-2 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-gold transition-colors">Experience</a>
+                <a href="contact.html"
+                    class="nav-link-god px-5 py-2 text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-gold transition-colors">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-gold z-50 relative">
+                <i data-lucide="menu" class="w-8 h-8"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 z-[40] bg-charcoal/95 backdrop-blur-xl hidden opacity-0 transition-opacity duration-300 flex items-center justify-center">
+        <div class="text-center space-y-6 flex flex-col">
+            <a href="index.html"
+                class="text-3xl font-heading font-bold text-white hover:text-gold transition-colors">Home</a>
+            <a href="about.html"
+                class="text-3xl font-heading font-bold text-gray-300 hover:text-gold transition-colors">About</a>
+            <a href="skills.html"
+                class="text-3xl font-heading font-bold text-gray-300 hover:text-gold transition-colors">Skills</a>
+            <a href="projects.html"
+                class="text-3xl font-heading font-bold text-gray-300 hover:text-gold transition-colors">Projects</a>
+            <a href="experience.html"
+                class="text-3xl font-heading font-bold text-gray-300 hover:text-gold transition-colors">Experience</a>
+            <a href="contact.html"
+                class="text-3xl font-heading font-bold text-gray-300 hover:text-white transition-colors">Contact</a>
+        </div>
+    </div>
+
+
+    <main
+        class="pt-32 pb-24 relative z-10 w-full overflow-hidden flex flex-col items-center justify-center min-h-screen">
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-fade-in-up">
+            <p class="text-gold uppercase tracking-[0.3em] text-xs font-bold mb-4">The Gate</p>
+            <h1 class="text-5xl md:text-7xl font-heading font-bold text-white mb-8">Initiate <br> <span
+                    class="text-glow-blue text-electric">Connection</span>.</h1>
+            <p class="text-gray-400 mb-12 max-w-lg mx-auto">Ready to engineer the future? Establish a direct uplink.</p>
+        </div>
+
+        <!-- Contact System -->
+        <div class="w-full max-w-5xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+
+            <!-- Visual Uplink (Left) -->
+            <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group hover:border-gold/50 transition-all duration-500 flex flex-col justify-center animate-fade-in-up"
+                data-accent="gold">
+                <div
+                    class="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                </div>
+                <div class="relative z-10 text-center">
+                    <div
+                        class="w-20 h-20 mx-auto bg-white/5 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 border border-white/10 group-hover:border-gold/50 shadow-[0_0_15px_rgba(255,215,0,0.1)]">
+                        <i data-lucide="mail-plus" class="w-10 h-10 text-gold"></i>
+                    </div>
+                    <h3 class="text-3xl font-heading font-bold text-white mb-2">Initialize Uplink</h3>
+                    <p class="text-gray-400 text-sm mb-8">Professional Inquiries & Collaborations</p>
+
+                    <a href="mailto:muditg782005@gmail.com"
+                        onclick="navigator.clipboard.writeText('muditg782005@gmail.com'); alert('Email address (muditg782005@gmail.com) copied to clipboard!');"
+                        class="inline-flex items-center gap-3 px-8 py-4 bg-gold text-charcoal font-bold rounded-lg uppercase tracking-widest hover:bg-white transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(255,215,0,0.3)]">
+                        <span>Send Transmission</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Digital Nexus (Right) -->
+            <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group hover:border-electric/50 transition-all duration-500 flex flex-col animate-fade-in-up"
+                style="animation-delay: 0.1s;" data-accent="blue">
+                <div
+                    class="absolute inset-0 bg-electric/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                </div>
+                <div class="relative z-10">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-heading font-bold text-white mb-1"><span
+                                class="text-electric">Network</span> Presence</h3>
+                        <div class="w-12 h-1 bg-electric/50 mx-auto rounded"></div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- LinkedIn -->
+                        <a href="https://www.linkedin.com/in/mudit-gupta-249677294/" target="_blank"
+                            class="p-4 bg-white/5 border border-white/5 rounded-xl hover:bg-[#0077b5]/20 hover:border-[#0077b5]/50 hover:text-white transition-all flex flex-col items-center gap-2 group/icon">
+                            <svg class="w-6 h-6 text-gray-400 group-hover/icon:text-[#0077b5] transition-colors"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                <rect width="4" height="12" x="2" y="9" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg>
+                            <span
+                                class="text-xs uppercase tracking-wider text-gray-500 group-hover/icon:text-gray-200">LinkedIn</span>
+                        </a>
+                        <!-- GitHub -->
+                        <a href="https://github.com/MuditGupta07" target="_blank"
+                            class="p-4 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 hover:border-white/50 hover:text-white transition-all flex flex-col items-center gap-2 group/icon">
+                            <svg class="w-6 h-6 text-gray-400 group-hover/icon:text-white transition-colors"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                                <path d="M9 18c-4.51 2-5-2-7-2" />
+                            </svg>
+                            <span
+                                class="text-xs uppercase tracking-wider text-gray-500 group-hover/icon:text-gray-200">GitHub</span>
+                        </a>
+                        <!-- LeetCode -->
+                        <a href="https://leetcode.com/u/muditg782005/" target="_blank"
+                            class="p-4 bg-white/5 border border-white/5 rounded-xl hover:bg-[#FFA116]/20 hover:border-[#FFA116]/50 hover:text-white transition-all flex flex-col items-center gap-2 group/icon">
+                            <i data-lucide="code-2"
+                                class="w-6 h-6 text-gray-400 group-hover/icon:text-[#FFA116] transition-colors"></i>
+                            <span
+                                class="text-xs uppercase tracking-wider text-gray-500 group-hover/icon:text-gray-200">LeetCode</span>
+                        </a>
+                        <!-- HackerRank -->
+                        <a href="https://www.hackerrank.com/profile/muditg782005" target="_blank"
+                            class="p-4 bg-white/5 border border-white/5 rounded-xl hover:bg-orange-600/20 hover:border-orange-600/50 hover:text-white transition-all flex flex-col items-center gap-2 group/icon">
+                            <i data-lucide="terminal"
+                                class="w-6 h-6 text-gray-400 group-hover/icon:text-orange-500 transition-colors"></i>
+                            <span
+                                class="text-xs uppercase tracking-wider text-gray-500 group-hover/icon:text-gray-200">HackerRank
+                            </span>
+                        </a>
+                        <!-- CodeChef -->
+                        <a href="https://www.codechef.com/users/mudit_gupta_07" target="_blank"
+                            class="col-span-2 p-4 bg-white/5 border border-white/5 rounded-xl hover:bg-green-600/20 hover:border-green-600/50 hover:text-white transition-all flex flex-col items-center gap-2 group/icon">
+                            <i data-lucide="cpu"
+                                class="w-6 h-6 text-gray-400 group-hover/icon:text-green-500 transition-colors"></i>
+                            <span
+                                class="text-xs uppercase tracking-wider text-gray-500 group-hover/icon:text-gray-200">CodeChef
+                                Status</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="relative w-full bg-charcoal py-8 border-t border-white/5 overflow-hidden">
+        <!-- Ambient Glow -->
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent shadow-[0_0_20px_rgba(255,215,0,0.5)]">
+        </div>
+        <div
+            class="absolute -top-32 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-gold/5 rounded-full blur-[100px] pointer-events-none">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <!-- Brand & System Status -->
+            <div class="flex flex-col items-center md:items-start gap-3">
+                <a href="index.html" class="flex flex-col items-center md:items-start group">
+                    <span
+                        class="text-2xl font-heading font-bold text-white tracking-tight group-hover:text-gold transition-colors duration-300">Mudit
+                        Gupta<span class="text-gold">.</span></span>
+                    <span
+                        class="text-[10px] font-mono text-gray-500 uppercase tracking-[0.2em] group-hover:text-white transition-colors">A
+                        Personal Digital Artifact</span>
+                </a>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center md:text-right">
+                <div class="flex justify-center md:justify-end gap-3 mb-2">
+                    <a href="https://github.com/MuditGupta07" target="blank"
+                        class="text-gray-400 hover:text-white transition-colors duration-300">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                            <path d="M9 18c-4.51 2-5-2-7-2" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mudit-gupta-249677294/" target="blank"
+                        class="text-gray-400 hover:text-[#0077b5] transition-colors duration-300">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect width="4" height="12" x="2" y="9" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </a>
+                    <a href="mailto:muditg782005@gmail.com"
+                        onclick="navigator.clipboard.writeText('muditg782005@gmail.com'); alert('Email address (muditg782005@gmail.com) copied to clipboard!');"
+                        title="muditg782005@gmail.com"
+                        class="text-gray-400 hover:text-white transition-colors duration-300">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="16" x="2" y="4" rx="2" />
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                        </svg>
+                    </a>
+                </div>
+                <p class="text-gray-600 text-[11px] uppercase tracking-widest font-mono">
+                    Crafting with intent and precision.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>lucide.createIcons();</script>
+    <script src="script.js"></script>
+</body>
+
+</html>
