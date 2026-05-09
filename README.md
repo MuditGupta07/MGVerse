@@ -48,6 +48,8 @@
 
 Designed and engineered with intent. Ready for deployment.
 
+https://muditgupta07.github.io/MGVerse/
+
 ---
 <p align="center">
   <i>"Crafting with intent and precision."</i>
